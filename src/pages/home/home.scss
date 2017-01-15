@@ -1,3 +1,21 @@
 page-home {
 
+  #introText{
+    height: 70%;
+  }
+
+  #checkButtonsContainer{
+    height: 20%;
+    //padding-top: 80%;
+  }
+
+  #checkInButton{
+    background-color: #1b8e0d;
+  }
+
+  #checkOutButton{
+    background-color: #f50303;
+    margin-top: 5%;
+  }
+
 }

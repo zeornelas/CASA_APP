@@ -5,7 +5,12 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-list>
 
+    <ion-item text-wrap *ngFor="let task of tasks">
+      <ion-checkbox checked="task.state"></ion-checkbox>
+      <ion-label>{{task.text}}</ion-label>
+    </ion-item>
 
-
+  </ion-list>
 </ion-content>

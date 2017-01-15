@@ -7,22 +7,21 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
-    <ion-card-content>
-      <button ion-button color="secondary" block item-right icon-left (click)="checkIn()">
-        <ion-icon name="log-in"></ion-icon>
-        Checkin
-      </button>
-    </ion-card-content>
-  </ion-card>
+  <div id="introText">
+    <h2>Como funciona?</h2>
 
-  <ion-card>
-    <ion-card-content>
-      <button ion-button color="danger" block item-right icon-right (click)="checkOut()">
-        Checkout
-        <ion-icon name="log-out"></ion-icon>
-      </button>
-    </ion-card-content>
-  </ion-card>
+  </div>
+
+  <div id="checkButtonsContainer">
+    <button ion-button id="checkInButton" block large item-right icon-left (click)="checkIn()">
+      <ion-icon name="log-in"></ion-icon>
+      Checkin
+    </button>
+
+    <button ion-button id="checkOutButton" block large item-right icon-left (click)="checkOut()">
+      <ion-icon name="log-out"></ion-icon>
+      Checkout
+    </button>
+  </div>
 
 </ion-content>
