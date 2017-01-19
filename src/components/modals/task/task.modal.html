@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="mode == 'create'">Criar tarefa</ion-title>
+    <ion-title *ngIf="mode == 'edit'">Editar tarefa</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="saveTask()">
+    <p>
+      <ion-textarea fz-elastic  formControlName="taskDescription" placeholder="Descreve a tarefa" required></ion-textarea>
+    </p>
+    <p>
+      <button ion-button block type="submit" [disabled]="!form.valid">Guardar tarefa</button>
+    </p>
+  </form>
+</ion-content>s

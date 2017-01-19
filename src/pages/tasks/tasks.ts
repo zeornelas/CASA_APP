@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
+import { StorageService } from "../../shared/services/storage.service";
+import {TasksModal} from "../../components/modals/";
 
 @Component({
   selector: 'page-tasks',
@@ -8,91 +10,42 @@ import { NavController } from 'ionic-angular';
 })
 export class TasksPage {
 
-  tasks: any[] = [
-    {
-      text: "Verificar a limpeza da casa de banho.",
-      state: false
-    },
-    {
-      text: "Levantar o pão.",
-      state: false
-    },
-    {
-      text: "Separar e servir os itens com prazo de validade (ou condição) a expirar.",
-      state: false
-    },
-    {
-      text: "Enrolar os talheres em guardanapos..",
-      state: false
-    },
-    {
-      text: "Lavar e encher as garrafas de água.",
-      state: false
-    },
-    {
-      text: "Limpar as mesas com desengordurante.",
-      state: false
-    },
-    {
-      text: "Colocar as cadeiras em cima da mesa.",
-      state: false
-    },
-    {
-      text: "Lavar a louça.",
-      state: false
-    },
-    {
-      text: "Lavar os contentores dos carros da comida.",
-      state: false
-    },
-    {
-      text: "Verificar que não foi deixada louça nos carros da comida.",
-      state: false
-    },
-    {
-      text: "Desligar os carros da comida da ficha.",
-      state: false
-    },
-    {
-      text: "Limpar o carro dos tabuleiros.",
-      state: false
-    },
-    {
-      text: "Varrer e passar a esfregona.",
-      state: false
-    },
-    {
-      text: "Organizar o armazém e completar os stocks (organizar itens por data de validade).",
-      state: false
-    },
-    {
-      text: "Colocar todas as coisas que necessitem no frigorífico.",
-      state: false
-    },
-    {
-      text: "Colocar o telemóvel a carregar.",
-      state: false
-    },
-    {
-      text: "Fechar as janelas.",
-      state: false
-    },
-    {
-      text: "Desligar a máquina da louça e apagar as luzes.",
-      state: false
-    },
-    {
-      text: "Despejar o lixo.",
-      state: false
-    },
-    {
-      text: "Colocar a chave na caixa de correio.",
-      state: false
-    }
-  ];
+  tasks = [];
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    private navCtrl: NavController,
+    private storage: StorageService
+  ){}
 
+  ionViewWillEnter(){
+      console.log("ionWillENTER");
+      this.getTasks();
   }
 
+  getTasks(){
+    this.tasks = this.storage.getTasks();
+  }
+
+  openModal(mode, index?, text?){
+    this.navCtrl.push(TasksModal, {"mode": mode, "index": index, "inputText": text});
+  }
+
+  deleteTask(index){
+    this.storage.deleteTask(index).then(data => {
+      console.log("PAGE-TASK TASK DELETED: " + JSON.stringify(data));
+      this.getTasks();
+    }).catch(error => {
+      console.error("PAGE-TASK ERROR TASK DELETED: " + JSON.stringify(error));
+
+    });
+  }
+
+  editTask(index, text){
+    this.openModal("edit", index, text);
+  }
+
+
+
 }
+
+
